@@ -33,7 +33,8 @@ phases:
       - docker push $DOCKER_IMAGE_NAME:$DOCKER_TAG
       - echo "Push complete. Generating image manifest file..."
       # Create an artifact file for CodeDeploy
-      - printf '{"ImageUri":"%s"}' "$DOCKER_IMAGE_NAME:$DOCKER_TAG" > imagedefinitions.json
+      - printf '[{"name":"my-app-container","imageUri":"%s"}]' "$DOCKER_IMAGE_NAME:$DOCKER_TAG" > imagedefinitions.json
+      # - printf '{"ImageUri":"%s"}' "$DOCKER_IMAGE_NAME:$DOCKER_TAG" > imagedefinitions.json
 artifacts:
   files:
     - imagedefinitions.json
