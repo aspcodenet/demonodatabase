@@ -4,7 +4,6 @@ version: 0.2
 env:
   variables:
     DOCKER_IMAGE_NAME: "stefanholmberg/javademoimage"
-    DOCKER_TAG: "latest"
     # The names of the parameters created in Step 1
     USERNAME_PARAM_NAME: "DOCKER_USERNAME"
     PASSWORD_PARAM_NAME: "DOCKER_PASSWORD"
@@ -33,8 +32,7 @@ phases:
       - docker push $DOCKER_IMAGE_NAME:$DOCKER_TAG
       - echo "Push complete. Generating image manifest file..."
       # Create an artifact file for CodeDeploy
-      - printf '{ "AWSEBDockerrunVersion": "1", "Image": { "Name": "%s", "Update": "true" }, "Ports": [{ "ContainerPort": "80" }] }' $REPO_URI:latest > Dockerrun.aws.json
-      # - printf '{"ImageUri":"%s"}' "$DOCKER_IMAGE_NAME:$DOCKER_TAG" > imagedefinitions.json
+      - printf '{ "AWSEBDockerrunVersion": "1", "Image": { "Name": "%s", "Update": "true" }, "Ports": [{ "ContainerPort": "80" }] }' $DOCKER_IMAGE_NAME:latest > Dockerrun.aws.json
 artifacts:
   files:
     - Dockerrun.aws.json
