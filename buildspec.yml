@@ -32,7 +32,7 @@ phases:
       - docker push $DOCKER_IMAGE_NAME:$DOCKER_TAG
       - echo "Push complete. Generating image manifest file..."
       # Create an artifact file for CodeDeploy
-      - printf '{ "AWSEBDockerrunVersion": "1", "Image": { "Name": "%s", "Update": "true" }, "Ports": [{ "ContainerPort": "80" }] }' "$DOCKER_IMAGE_NAME:latest" > Dockerrun.aws.json
+      - printf '{ "AWSEBDockerrunVersion": "1", "Image": { "Name": "%s", "Update": "true" }, "Ports": [{ "ContainerPort": "8080" }] }' "$DOCKER_IMAGE_NAME:latest" > Dockerrun.aws.json
 artifacts:
   files:
     - Dockerrun.aws.json
